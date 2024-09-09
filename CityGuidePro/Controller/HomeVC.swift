@@ -597,7 +597,9 @@ func zoomInAtUserLocation(axis: [Int]) {
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {    // Gets angle of user
         UIView.animate(withDuration: 0.5) {
-            let angle = newHeading.trueHeading    // true heading is the heading (mesured in degrees)     relative to true North
+            let angle = newHeading.trueHeading
+            print(angle)
+            // true heading is the heading (mesured in degrees)     relative to true North
             //let degToRad = angle * .pi / 180               // to convert degrees to radians
             //let degrees = angle * 180 / .pi         // to convert radians to degrees
             self.userAngle = angle                  // this line is very important...it updates our orientation to align with the direction we are turning in our current position
@@ -1115,25 +1117,62 @@ func zoomInAtUserLocation(axis: [Int]) {
 //               showMailError()
 //           }
            
-           
-        let alertController = UIAlertController(title: "\n", message: "After clicking the 'Submit' button, you will be taken to a new window where you can share any additional comments or feedback with our development team through email.", preferredStyle: .alert)
+       
+        
+//        let customalertController = feedbackVC();
+//        self.present(customalertController, animated: true, completion: nil)
+        
+        
+        
+        let alertController = UIAlertController(title: "Feedback",
+                                                message: ""
+//                                                    "After clicking the 'Submit' button, you will be taken to a new window where you can share any additional comments or feedback with our development team through email."
+                                                ,
+                                                preferredStyle: .alert)
 
         // Create the rating control
-        let ratingControl = RatingControl(frame: CGRect(x: 0, y: 0, width: 230, height: 50))
+        let ratingControl = RatingControl(frame: CGRect(x: 0, y: 25, width: 230, height: 50))
         alertController.view.addSubview(ratingControl)
+
+        alertController.addTextField { (textField) in
+        textField.placeholder = "Please enter your feedback here"
+        }
+        
+        let date = Date();
+        let formatter = DateFormatter();
+        formatter.dateFormat = "yyyy-MM-dd";
+        let dateString = formatter.string(from: date);
+        
+        
+
+
+
+
 
         // Add the "Cancel" action
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
         // Add the "Submit" action
         alertController.addAction(UIAlertAction(title: "Submit", style: .default, handler: { _ in
-        // User clicked the "Submit" button, show the email composer
-        self.showEmailComposer(withRating: ratingControl.rating)}))
+            // User clicked the "Submit" button, show the email composer
+            
+            
+            //        self.sendFeedback(rating: ratingControl.rating, feedback: alertController.textFields?.first?.text ?? "No feedback")
+            print(date)
+            print("Date Printed!")
+            postFeedback(date: dateString, rating: ratingControl.rating, comment: alertController.textFields?.first?.text ?? "No feedback", auth: "eW7jYaEz7mnx0rrM", vc: self);
+            
+//            self.showEmailComposer(withRating: ratingControl.rating)
+            
+        }))
 
         // Show the alert controller
         self.present(alertController, animated: true, completion: nil)
     }
 
+
+    
+    
     
     func showEmailComposer(withRating rating: Int) {
         // Create and configure the email composer
@@ -1297,14 +1336,19 @@ func zoomInAtUserLocation(axis: [Int]) {
                             locnames.append(checkerForHub)
                         }
                     }
-                    else{                                          // when locname has the word "Hub"
+                    else{ 
+                        print("I entered to check curNode!")// when locname has the word "Hub"
                         let n = i["node"] as! Int
                         curNode = n
                     }
                 }
             }
         }
+        
+        print(poiAtCurrentNode)
+        print(POI, userAngle, curNode)
         if !POI.isEmpty && userAngle != -1 && curNode != -1{
+            print("I entered here!")
             poiAtCurrentNode = generatePOIDirections(POI: POI, angle: userAngle, currentNode: curNode)
             speechFlag = true
         }
@@ -1322,11 +1366,17 @@ func zoomInAtUserLocation(axis: [Int]) {
             // }
             
             // POI is the array of PoI node numbers associated with each beacon...so for beacon 1, the POI will be [1, 2] which are nodes 1 & 2
+            print(POI)
             for j in POI{
                 // print(POI)
                 // print(locnames)
                 // print(poiAtCurrentNode)
+                print(j)
                 let index = POI.firstIndex(of: j)
+                print(index)
+                print(locnames[index!])
+                print(poiAtCurrentNode[j])
+                print(poiAtCurrentNode)
                 let sentence = locnames[index!] + " is " + poiAtCurrentNode[j]!     // narration of PoIs associated with a beacon
                 speakThis(sentence: sentence)
                 

@@ -41,33 +41,101 @@ var destinations : [String] = []
 var listOfBeacon : [Int] = []
 var image : UIImage? = nil
 
+func getCurrentUserLocation() -> CLLocation{
+    var lat: Double
+    var long: Double
+    let locManager = CLLocationManager()
+    var currentLocation: CLLocation!
+    locManager.requestWhenInUseAuthorization()
+    if(locManager.authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse || locManager.authorizationStatus == CLAuthorizationStatus.authorizedAlways){
+        currentLocation = locManager.location
+        lat = currentLocation.coordinate.latitude
+        long = currentLocation.coordinate.longitude
+    }
+    else{
+        return CLLocation(latitude: 0, longitude: 0)
+    }
+    return currentLocation
+}
+
+
+func postFeedback(date: String, rating: Int, comment: String, auth: String, vc : UIViewController){
+   
+    let url = URL(string: "http://3.13.85.90:3000/sendFeedback");
+    var request = URLRequest(url: url! as URL)
+    request.httpMethod = "POST"
+    var dataStr = ""
+    let location = getCurrentUserLocation()
+    dataStr = dataStr + "date=\(date)" + "&stars=\(rating)" + "&comment=\(comment)" + "&auth=\(auth)" + "&lat=\(location.coordinate.latitude)" + "&long=\(location.coordinate.longitude)"
+    let encrypt = dataStr.data(using: .utf8)
+    let uploadJob = URLSession.shared.uploadTask(with: request, from: encrypt!) { data, response, error in
+            if error != nil {
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Connection Interrupted", message: "Looks like the connection to the server didn't work.  Do you have Internet access?", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    vc.present(alert, animated: true, completion: nil)
+                }
+            }
+            else{
+                do{ 
+                    DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Success", message: "Your feedback has been sent!", preferredStyle: .alert)
+                    vc.present(alert, animated: true, completion: nil)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        alert.dismiss(animated: true, completion: nil)
+                    }
+                }
+                    
+                }
+            }
+    }
+
+    uploadJob.resume()
+
+}
+
+
 func postToDB(typeOfAction: String, beaconID: Int, auth: String, floorNum: Int?, vc : UIViewController){        // Main function
     switch typeOfAction{
+
+//        case "sendFeedback":
+//            //trial trial
+//            //let url = URL(string: "http://wh-308-3922mm.dyn.wichita.edu:5000/feedback")
+//            let url = URL(string: "http://34.125.41.220:3000/feedback")
+//            var request = URLRequest(url: url! as URL)
+//            request.httpMethod = "POST"
+//            var dataStr = ""
+//            // dataStr = dataStr + "&rating=\(String(beaconID))" + "&auth=\(auth)"
+
+
+
         case "beacons":
             // trial trial
             //let url = URL(string: "http://wh-308-3922mm.dyn.wichita.edu:5000/data")
-            let url = URL(string: "http://34.16.171.175:3000/data")      // for cloud server, add permission to info.plist as well...see the code version instead of table version of info.plist
+            let url = URL(string: "http://3.13.85.90:3000/data")      // for cloud server, add permission to info.plist as well...see the code version instead of table version of info.plist
             
-            //code to get current phone location
-            var lat: Double
-            var long: Double
-            let locManager = CLLocationManager()
-            var currentLocation: CLLocation!
-            locManager.requestWhenInUseAuthorization()
-            if(locManager.authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse || locManager.authorizationStatus == CLAuthorizationStatus.authorizedAlways){
-                currentLocation = locManager.location
-                lat = currentLocation.coordinate.latitude
-                long = currentLocation.coordinate.longitude
-            }
-            else{
-                return
-            }
+            // //code to get current phone location
+            // var lat: Double
+            // var long: Double
+            // let locManager = CLLocationManager()
+            // var currentLocation: CLLocation!
+            // locManager.requestWhenInUseAuthorization()
+            // if(locManager.authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse || locManager.authorizationStatus == CLAuthorizationStatus.authorizedAlways){
+            //     currentLocation = locManager.location
+            //     lat = currentLocation.coordinate.latitude
+            //     long = currentLocation.coordinate.longitude
+            // }
+            // else{
+            //     return
+            // }
+
+            let location = getCurrentUserLocation()
         
             //made changes to dataStr
             var request = URLRequest(url: url! as URL)
             request.httpMethod = "POST"
             var dataStr = ""
-            dataStr = dataStr + "&beaconid=\(String(beaconID))" + "&auth=\(auth)" + "&lat=\(lat)" + "&long=\(long)"
+            dataStr = dataStr + "&beaconid=\(String(beaconID))" + "&auth=\(auth)" + "&lat=\(location.coordinate.latitude)" + "&long=\(location.coordinate.longitude)"
             let encrypt = dataStr.data(using: .utf8)
             let uploadJob = URLSession.shared.uploadTask(with: request, from: encrypt!) { data, response, error in
                     if error != nil {
@@ -107,28 +175,30 @@ func postToDB(typeOfAction: String, beaconID: Int, auth: String, floorNum: Int?,
         case "getFloor":
             //trial trial
             //let url = URL(string: "http://wh-308-3922mm.dyn.wichita.edu:5000/floor")
-            let url = URL(string: "http://34.16.171.175:3000/floor")
+            let url = URL(string: "http://3.13.85.90:3000/floor")
             
             //code to get current phone location
-            var lat: Double
-            var long: Double
-            let locManager = CLLocationManager()
-            var currentLocation: CLLocation!
-            locManager.requestWhenInUseAuthorization()
-            if(locManager.authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse || locManager.authorizationStatus == CLAuthorizationStatus.authorizedAlways){
-                currentLocation = locManager.location
-                lat = currentLocation.coordinate.latitude
-                long = currentLocation.coordinate.longitude
-            }
-            else{
-                return
-            }
+            // var lat: Double
+            // var long: Double
+            // let locManager = CLLocationManager()
+            // var currentLocation: CLLocation!
+            // locManager.requestWhenInUseAuthorization()
+            // if(locManager.authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse || locManager.authorizationStatus == CLAuthorizationStatus.authorizedAlways){
+            //     currentLocation = locManager.location
+            //     lat = currentLocation.coordinate.latitude
+            //     long = currentLocation.coordinate.longitude
+            // }
+            // else{
+            //     return
+            // }
+
+            let location = getCurrentUserLocation()
         
             //made changes to dataStr
             var request = URLRequest(url: url! as URL)
             request.httpMethod = "POST"
             var dataStr = ""
-            dataStr = dataStr + "&gid=\(String(describing: beaconID))" + "&fno=\(String(describing: floorNum!))" + "&auth=\(auth)" + "&lat=\(lat)" + "&long=\(long)"
+            dataStr = dataStr + "&gid=\(String(describing: beaconID))" + "&fno=\(String(describing: floorNum!))" + "&auth=\(auth)" + "&lat=\(location.coordinate.latitude)" + "&long=\(location.coordinate.longitude)"
             let encrypt = dataStr.data(using: .utf8)
             let uploadJob = URLSession.shared.uploadTask(with: request, from: encrypt!) { data, response, error in
                     if error != nil {
@@ -156,28 +226,31 @@ func postToDB(typeOfAction: String, beaconID: Int, auth: String, floorNum: Int?,
             //here becaonID is set as groupID from our main VC
             //trial trial
             //let url = URL(string: "http://wh-308-3922mm.dyn.wichita.edu:5000/beacon")
-            let url = URL(string: "http://34.16.171.175:3000/beacon")
+            let url = URL(string: "http://3.13.85.90:3000/beacon")
         
-            //code to get current phone location
-            var lat: Double
-            var long: Double
-            let locManager = CLLocationManager()
-            var currentLocation: CLLocation!
-            locManager.requestWhenInUseAuthorization()
-            if(locManager.authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse || locManager.authorizationStatus == CLAuthorizationStatus.authorizedAlways){
-                currentLocation = locManager.location
-                lat = currentLocation.coordinate.latitude
-                long = currentLocation.coordinate.longitude
-            }
-            else{
-                return
-            }
+            // //code to get current phone location
+            // var lat: Double
+            // var long: Double
+            // let locManager = CLLocationManager()
+            // var currentLocation: CLLocation!
+            // locManager.requestWhenInUseAuthorization()
+            // if(locManager.authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse || locManager.authorizationStatus == CLAuthorizationStatus.authorizedAlways){
+            //     currentLocation = locManager.location
+            //     lat = currentLocation.coordinate.latitude
+            //     long = currentLocation.coordinate.longitude
+            // }
+            // else{
+            //     return
+            // }
         
+            let location = getCurrentUserLocation()
+
+
             //made changes to dataStr
             var request = URLRequest(url: url! as URL)
             request.httpMethod = "POST"
             var dataStr = ""
-            dataStr = dataStr + "&gid=\(String(describing: beaconID))" + "&fno=\(String(describing: floorNum!))" + "&auth=\(auth)" + "&lat=\(lat)" + "&long=\(long)"
+            dataStr = dataStr + "&gid=\(String(describing: beaconID))" + "&fno=\(String(describing: floorNum!))" + "&auth=\(auth)" + "&lat=\(location.coordinate.latitude)" + "&long=\(location.coordinate.longitude)"
             let encrypt = dataStr.data(using: .utf8)
             let uploadJob = URLSession.shared.uploadTask(with: request, from: encrypt!) { data, response, error in
                     if error != nil {
@@ -194,7 +267,7 @@ func postToDB(typeOfAction: String, beaconID: Int, auth: String, floorNum: Int?,
                                 let attributedString = try NSAttributedString(data: data!, options: [:], documentAttributes: nil)
                                 let beaconList = attributedString.string.split(separator: "\n")
                                 for i in beaconList{
-                                    listOfBeacon.append(Int(i)!)
+                                listOfBeacon.append(Int(i)!)
                                 }
                             }
                         } catch {

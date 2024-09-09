@@ -17,6 +17,7 @@
 		9FF037F629DCF2AF00A4E103 /* SettingsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF037F529DCF2AF00A4E103 /* SettingsInfoViewController.swift */; };
 		9FF037FA29DE08E500A4E103 /* ExitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF037F929DE08E500A4E103 /* ExitsViewController.swift */; };
 		9FF0645B29EF158D00836401 /* firstScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF0645A29EF158D00836401 /* firstScreenVC.swift */; };
+		A57B7C4E2BAA2701005D7A5A /* feedbackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B7C4D2BAA2700005D7A5A /* feedbackVC.swift */; };
 		BDA9DFA42AEC2985007EC907 /* Settings Table Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA9DFA32AEC2985007EC907 /* Settings Table Controller.swift */; };
 		BDD700BF2AE604AE00F68E07 /* RestroomsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD700BB2AE5F78000F68E07 /* RestroomsVC.swift */; };
 		D14309F5299BEC240048D90C /* CustomPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14309F4299BEC240048D90C /* CustomPopUpViewController.swift */; };
@@ -52,6 +53,7 @@
 		9FF037F529DCF2AF00A4E103 /* SettingsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInfoViewController.swift; sourceTree = "<group>"; };
 		9FF037F929DE08E500A4E103 /* ExitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitsViewController.swift; sourceTree = "<group>"; };
 		9FF0645A29EF158D00836401 /* firstScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstScreenVC.swift; sourceTree = "<group>"; };
+		A57B7C4D2BAA2700005D7A5A /* feedbackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = feedbackVC.swift; sourceTree = "<group>"; };
 		BDA9DFA32AEC2985007EC907 /* Settings Table Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings Table Controller.swift"; sourceTree = "<group>"; };
 		BDD700BB2AE5F78000F68E07 /* RestroomsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestroomsVC.swift; sourceTree = "<group>"; };
 		D14309F4299BEC240048D90C /* CustomPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUpViewController.swift; sourceTree = "<group>"; };
@@ -99,9 +101,9 @@
 				D16112F729993A85005BE87A /* Eddystone.swift */,
 				9F4D318F29F8937500DA59B7 /* RatingControl.swift */,
 				9FF0645A29EF158D00836401 /* firstScreenVC.swift */,
+				9FA61CD129A7FF2400C0A0F3 /* EnterContactsVC3.swift */,
 				BDD700BB2AE5F78000F68E07 /* RestroomsVC.swift */,
 				9FF037F529DCF2AF00A4E103 /* SettingsInfoViewController.swift */,
-				9FA61CD129A7FF2400C0A0F3 /* EnterContactsVC3.swift */,
 				9FBBEDD129EDF573003EA5A3 /* EmailPopUpVC.swift */,
 				9FA61CCF29A7FF1700C0A0F3 /* EnterContactsVC2.swift */,
 				D16112FC29993A85005BE87A /* FloorPlanManipulation.swift */,
@@ -181,6 +183,7 @@
 				D1EEF33A2997F23C00D15EBA /* HomeVC.swift */,
 				D1EEF33E2997F26200D15EBA /* ContactVC.swift */,
 				D1DCF03A29A662A400F018CF /* ProfileVC.swift */,
+				A57B7C4D2BAA2700005D7A5A /* feedbackVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				D14309F5299BEC240048D90C /* CustomPopUpViewController.swift in Sources */,
 				D1EEF3242997F18100D15EBA /* AppDelegate.swift in Sources */,
 				D161130329993A85005BE87A /* LevenshteinDistance.swift in Sources */,
+				A57B7C4E2BAA2701005D7A5A /* feedbackVC.swift in Sources */,
 				9882B49429A0649E0091A99B /* EditDetailsVC.swift in Sources */,
 				BDA9DFA42AEC2985007EC907 /* Settings Table Controller.swift in Sources */,
 				D161130129993A85005BE87A /* BeaconScanner.swift in Sources */,

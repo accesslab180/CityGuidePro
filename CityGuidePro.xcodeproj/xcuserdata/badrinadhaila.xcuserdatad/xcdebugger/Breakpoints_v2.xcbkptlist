@@ -82,38 +82,38 @@
             endingLineNumber = "239"
             landmarkName = "HomeVC"
             landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "54D7CCFC-CAB9-40DE-9FD2-672AC73154DB - 17199771a5763935"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CityGuidePro.HomeVC.viewDidAppear(Swift.Bool) -&gt; ()"
-                  moduleName = "CityGuidePro"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/badrinadhaila/Documents/Works/Career/Swift/Ajay&apos;s%20CityGuidePro/CityGuidePro/CityGuidePro/Controller/HomeVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "231"
-                  endingLineNumber = "231"
-                  offsetFromSymbolStart = "436">
-               </Location>
-               <Location
-                  uuid = "54D7CCFC-CAB9-40DE-9FD2-672AC73154DB - 17199771a5763912"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CityGuidePro.HomeVC.viewDidAppear(Swift.Bool) -&gt; ()"
-                  moduleName = "CityGuidePro"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/badrinadhaila/Documents/Works/Career/Swift/Ajay&apos;s%20CityGuidePro/CityGuidePro/CityGuidePro/Controller/HomeVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "232"
-                  endingLineNumber = "232"
-                  offsetFromSymbolStart = "504">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1E1CBB88-6756-4819-A979-D62DACCE72FC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CityGuidePro/Controller/HomeVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1146"
+            endingLineNumber = "1146"
+            landmarkName = "sendEmail(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3AE5F11C-F554-4FCA-BE78-C9F2BBC0D7A9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CityGuidePro/Controller/HomeVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1164"
+            endingLineNumber = "1164"
+            landmarkName = "sendEmail(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

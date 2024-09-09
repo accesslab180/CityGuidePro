@@ -51,7 +51,7 @@ import UIKit
         let selectedRating = index + 1
         
         if selectedRating == rating {
-            // If the selected star represents the current rating, reset the rating to 0.
+            // If the selected star represents the current rating, reset the rating to 5.
             rating = 5
         } else {
             // Otherwise set the rating to the selected star
